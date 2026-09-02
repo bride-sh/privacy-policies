@@ -95,6 +95,6 @@ This policy may be updated when bRide’s features, service providers, or legal 
 
 **HumbleBeeAI**  
 76, Gyeonginnam-gil, Michuhol-gu, Incheon, Republic of Korea  
-Email: [services@humblebee.ai](mailto:services@humblebee.ai)  
+Email: [support@humblebee.ai](mailto:support@humblebee.ai)  
 Website: [https://www.humblebee.ai/](https://www.humblebee.ai/)
 
