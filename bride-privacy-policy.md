@@ -1,6 +1,6 @@
 # bRide Privacy Policy
 
-**Effective date:** August 31, 2026
+**Effective date:** [TBD — date of publication]
 
 bRide is a workplace attendance application provided by HumbleBeeAI for authorized organizations and team members. This Privacy Policy explains what information bRide processes, why it is processed, and the choices available to users.
 
@@ -16,15 +16,35 @@ bRide processes attendance-related information such as check-in events, AFK peri
 
 ### Location information
 
-When location-based attendance is enabled, bRide processes precise location information, including coordinates, timestamp, and accuracy information, to:
+bRide collects location only to decide whether you are at an approved office. It does not track your route, record where you are outside the office, or build a map history of your day.
 
-- identify the nearest approved office;
-- verify whether you are within an approved office radius;
-- support automatic or manual office check-in;
-- detect relevant office entry and exit events; and
-- provide attendance reminders when you leave an office during scheduled work time.
+**How it works.** After you sign in and grant permission, your phone places an invisible circle (geofence) around each approved office. The phone's operating system watches these circles; bRide is not running and reads no location while you are away from an office. When you enter or leave a circle, the phone wakes bRide, which turns on GPS for a short time (seconds, at most about 10 minutes while you approach) to confirm the event, then turns GPS off again. Because the phone is usually in your pocket, this requires "Always" location permission and precise location.
 
-bRide may use location in the background or when the app is closed if you grant the required permission. bRide does not use location for advertising. Raw coordinates are not included in employee-facing Discord attendance messages.
+**What is sent to the server and stored:**
+
+| When | What is stored | Coordinates? |
+|---|---|---|
+| Office check-in (manual button or automatic on arrival) and, optionally, returning from AFK | Time, office, latitude/longitude of 1–3 GPS readings taken at the office, GPS accuracy, distance from the office, verification result | **Yes**, as check-in evidence |
+| Entering or leaving an office during the day | Time, office, enter/exit, distance from the office (meters), GPS accuracy | **No** |
+| Arrival recorded while the server was unreachable | Arrival time only | No |
+| Location setting status | Whether "Always" location, precise location, and (iOS) Background App Refresh are on | No |
+| Remote check-in, late reason, full-day-out | Reason text and time | No (location not used) |
+
+Manual office check-in requires a current GPS reading to confirm you are at the office. Remote check-in does not use location.
+
+**When.** Location is checked only when you check in or when your phone enters or leaves an office circle. It is not checked on a timer. bRide sends nothing while you are away from all offices, including at home, outside working hours, during breaks, and on days off. If you pass through an office circle outside working hours, during a break, or on a day off, the entry or exit is still recorded, but no reminders are sent and, on days off, it is not counted for lateness, AFK, or early-departure statistics. On remote days office entries and exits are not stored. Signing out removes all office circles, and bRide can no longer wake up.
+
+If the server cannot be reached, confirmed entry and exit records are kept on your phone for up to 7 days and sent when the connection returns.
+
+**Who can see it.**
+
+- Authorized administrators of your organization see, in the attendance dashboard, your check-in time, out time, AFK periods, office entry and exit times (up to the last 31 days at a time), and whether your location settings are off. The dashboard does not show coordinates, distances, or maps.
+- Check-in coordinates are kept as evidence on the server and are not shown in the dashboard. They are accessible only to service operators for verification, troubleshooting, and dispute resolution.
+- Discord attendance messages contain only short status texts (for example `in-09:02`, `afk-13:00`, `back`, `done`) and never contain coordinates.
+
+bRide does not use location for advertising and does not sell or share location with third parties for their own purposes.
+
+**Consent.** bRide collects location only after you give consent and grant the location permission on your device. You can withdraw consent at any time by turning off location permission in your device settings or by signing out. If you do, automatic check-in and office entry/exit recording stop, and your out time may be incorrect; the app will show a reminder and the dashboard will show that your location setting is off.
 
 ### Announcements and read status
 
@@ -46,9 +66,11 @@ Information is processed to:
 - deliver approved attendance updates to organization-authorized Discord destinations; and
 - protect, troubleshoot, and improve the reliability of the service.
 
-## 3. Where information is processed
+## 3. Where information is processed and stored
 
-The mobile app communicates with the bRide REST API. The bRide service may retrieve authorized profile and announcement data from HStaff and stores attendance records in the bRide attendance database. Attendance status messages may be delivered by the server to an organization-approved Discord channel or thread.
+The mobile app communicates only with the bRide server. The bRide server and its PostgreSQL database are hosted by [TBD — cloud provider] in [TBD — region, e.g. Seoul, Republic of Korea]. All location and attendance records are stored there.
+
+The bRide server retrieves authorized profile, schedule, and announcement data from HStaff, and may deliver attendance status messages to an organization-approved Discord channel or thread. Discord is operated by Discord Inc. in the United States; only the short status texts described above are sent to it, never location data.
 
 The mobile app does not directly connect to HStaff, PostgreSQL, or Discord for attendance operations.
 
@@ -65,9 +87,16 @@ bRide does not sell personal information and does not use attendance or location
 
 ## 5. Retention
 
-Attendance records, location evidence, announcements read status, and related account information are retained only as needed for workplace attendance, security, operational, and applicable legal requirements. Retention periods may be set by the organization that provides your account. You may contact your organization administrator or the contact below for information about the retention period that applies to you.
+| Data | Kept on the server for |
+|---|---|
+| Check-in location evidence (coordinates) | [TBD — e.g. 6 months] |
+| Office entry/exit records | [TBD — e.g. 1 year] |
+| Attendance records (check-in, AFK, out times, reasons) | [TBD — e.g. 3 years, or as required by labor law] |
+| Location setting status | Until replaced by the next update |
 
-Local app data, including secure session credentials and cached profile or attendance context, is removed or invalidated when appropriate, including when you sign out. Some device-managed secure storage may follow operating-system backup or keychain behavior.
+When the retention period ends, or when you leave the organization and the records are no longer needed, the data is deleted. Data may be kept longer only where a law requires it. Confirmed entry/exit records waiting to upload are deleted from your phone after 7 days.
+
+Local app data, including secure session credentials and cached profile or attendance context, is removed or invalidated when you sign out. Some device-managed secure storage may follow operating-system backup or keychain behavior.
 
 ## 6. Security
 
